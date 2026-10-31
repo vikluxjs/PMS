@@ -26,6 +26,38 @@ DOMAIN=так-совпало.рф LE_EMAIL=you@mail.com N_CLIENTS=3 \
 bash <(curl -fsSL https://raw.githubusercontent.com/vikluxjs/PMS/main/install.sh)
 ```
 
+## Установка из приватного репозитория
+
+Пока репозиторий **приватный**, анонимный `curl` к `raw.githubusercontent.com` отдаёт 404 —
+нужен **GitHub-токен** (PAT с правом `repo` / `Contents: Read`). В ките секретов нет, поэтому
+проще всего сделать репо **публичным** (Settings → General → Danger Zone → Change visibility),
+тогда работает обычный однострочник выше. Если же хочешь оставить приватным:
+
+**Способ 1 — клонировать с токеном (рекомендуется):**
+
+```bash
+PAT=ghp_xxxxxxxxxxxxxxxxxxxx          # твой токен
+git clone https://$PAT@github.com/vikluxjs/PMS.git /opt/sovpalo-kit
+bash /opt/sovpalo-kit/install.sh      # видит локальный lib/ и не клонирует повторно
+```
+
+**Способ 2 — однострочник с токеном:**
+
+```bash
+PAT=ghp_xxxxxxxxxxxxxxxxxxxx
+SOVPALO_REPO="https://$PAT@github.com/vikluxjs/PMS" \
+bash <(curl -fsSL -H "Authorization: token $PAT" \
+  https://raw.githubusercontent.com/vikluxjs/PMS/main/install.sh)
+```
+
+`curl` тянет `install.sh` с токеном в заголовке, а `SOVPALO_REPO` с тем же токеном нужен, чтобы
+скрипт смог до-клонировать остальные файлы (`lib/`, `templates/`) на сервере.
+
+> ⚠️ Токен попадёт в историю shell и в `/opt/sovpalo-kit/.git/config` (remote с токеном в URL).
+> После установки почисти: `history -c` и
+> `git -C /opt/sovpalo-kit remote set-url origin https://github.com/vikluxjs/PMS.git`.
+> Выдавай токену минимум прав и отзови после использования.
+
 ## ⚠️ Предусловие: DNS
 
 Сертификат Let's Encrypt не выпустится, пока домен не указывает на сервер.
