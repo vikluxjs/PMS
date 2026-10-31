@@ -1,0 +1,576 @@
+[
+ {
+  "user_id": 1,
+  "enable": 1,
+  "total": 0,
+  "remark": "",
+  "listen": "",
+  "port": 443,
+  "protocol": "vless",
+  "tag": "inbound-443",
+  "settings": {
+   "clients": [
+    {
+     "comment": "",
+     "created_at": 1771579262000,
+     "email": "__EMAIL__",
+     "enable": true,
+     "expiryTime": 0,
+     "flow": "xtls-rprx-vision-udp443",
+     "id": "__UUID__",
+     "limitIp": 0,
+     "reset": 0,
+     "subId": "__SUBID__",
+     "tgId": 0,
+     "totalGB": 0,
+     "updated_at": 1771665436000
+    }
+   ],
+   "decryption": "none",
+   "encryption": "none",
+   "testseed": [
+    900,
+    500,
+    900,
+    256
+   ]
+  },
+  "stream_settings": {
+   "network": "tcp",
+   "security": "reality",
+   "externalProxy": [
+    {
+     "forceTls": "same",
+     "dest": "__DOMAIN__",
+     "port": 443,
+     "remark": ""
+    }
+   ],
+   "realitySettings": {
+    "show": false,
+    "xver": 0,
+    "target": "127.0.0.1:8443",
+    "serverNames": [
+     "__DOMAIN__"
+    ],
+    "privateKey": "__REALITY_PRIV__",
+    "minClientVer": "",
+    "maxClientVer": "",
+    "maxTimediff": 0,
+    "shortIds": [
+     "__SHORTIDS__"
+    ],
+    "mldsa65Seed": "",
+    "settings": {
+     "publicKey": "__REALITY_PUB__",
+     "fingerprint": "random",
+     "serverName": "__DOMAIN__",
+     "spiderX": "/",
+     "mldsa65Verify": ""
+    }
+   },
+   "tcpSettings": {
+    "acceptProxyProtocol": false,
+    "header": {
+     "type": "none"
+    }
+   }
+  },
+  "sniffing": {
+   "enabled": false,
+   "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+   ],
+   "metadataOnly": false,
+   "routeOnly": false
+  }
+ },
+ {
+  "user_id": 1,
+  "enable": 1,
+  "total": 0,
+  "remark": "",
+  "listen": "",
+  "port": 2053,
+  "protocol": "vless",
+  "tag": "inbound-2053",
+  "settings": {
+   "clients": [
+    {
+     "id": "__UUID__",
+     "security": "",
+     "password": "__PASSWORD__",
+     "flow": "",
+     "email": "__EMAIL__",
+     "limitIp": 0,
+     "totalGB": 0,
+     "expiryTime": 0,
+     "enable": true,
+     "tgId": 0,
+     "subId": "__SUBID__",
+     "comment": "",
+     "reset": 0,
+     "created_at": 1792358935000,
+     "updated_at": 1792358935000
+    }
+   ],
+   "decryption": "none",
+   "fallbacks": []
+  },
+  "stream_settings": {
+   "network": "ws",
+   "security": "tls",
+   "externalProxy": [
+    {
+     "forceTls": "same",
+     "dest": "__DOMAIN__",
+     "port": 2053,
+     "remark": ""
+    }
+   ],
+   "tlsSettings": {
+    "serverName": "__DOMAIN__",
+    "minVersion": "1.2",
+    "maxVersion": "1.3",
+    "cipherSuites": "",
+    "rejectUnknownSni": false,
+    "disableSystemRoot": false,
+    "enableSessionResumption": false,
+    "certificates": [
+     {
+      "certificateFile": "/etc/letsencrypt/live/__DOMAIN__/fullchain.pem",
+      "keyFile": "/etc/letsencrypt/live/__DOMAIN__/privkey.pem",
+      "ocspStapling": 3600,
+      "oneTimeLoading": false,
+      "usage": "encipherment",
+      "buildChain": false
+     }
+    ],
+    "alpn": [
+     "http/1.1"
+    ],
+    "settings": {
+     "allowInsecure": false,
+     "fingerprint": ""
+    }
+   },
+   "wsSettings": {
+    "acceptProxyProtocol": false,
+    "path": "__PATH__",
+    "host": "",
+    "headers": {}
+   }
+  },
+  "sniffing": {
+   "enabled": false,
+   "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+   ],
+   "metadataOnly": false,
+   "routeOnly": false
+  }
+ },
+ {
+  "user_id": 1,
+  "enable": 1,
+  "total": 0,
+  "remark": "",
+  "listen": "",
+  "port": 2083,
+  "protocol": "trojan",
+  "tag": "inbound-2083",
+  "settings": {
+   "clients": [
+    {
+     "id": "__UUID__",
+     "security": "",
+     "password": "__PASSWORD__",
+     "flow": "",
+     "email": "__EMAIL__",
+     "limitIp": 0,
+     "totalGB": 0,
+     "expiryTime": 0,
+     "enable": true,
+     "tgId": 0,
+     "subId": "__SUBID__",
+     "comment": "",
+     "reset": 0,
+     "created_at": 1792358937000,
+     "updated_at": 1792358937000
+    }
+   ],
+   "fallbacks": []
+  },
+  "stream_settings": {
+   "network": "grpc",
+   "security": "tls",
+   "externalProxy": [
+    {
+     "forceTls": "same",
+     "dest": "__DOMAIN__",
+     "port": 2083,
+     "remark": ""
+    }
+   ],
+   "tlsSettings": {
+    "serverName": "__DOMAIN__",
+    "minVersion": "1.2",
+    "maxVersion": "1.3",
+    "cipherSuites": "",
+    "rejectUnknownSni": false,
+    "disableSystemRoot": false,
+    "enableSessionResumption": false,
+    "certificates": [
+     {
+      "certificateFile": "/etc/letsencrypt/live/__DOMAIN__/fullchain.pem",
+      "keyFile": "/etc/letsencrypt/live/__DOMAIN__/privkey.pem",
+      "ocspStapling": 3600,
+      "oneTimeLoading": false,
+      "usage": "encipherment",
+      "buildChain": false
+     }
+    ],
+    "alpn": [
+     "h2"
+    ],
+    "settings": {
+     "allowInsecure": false,
+     "fingerprint": ""
+    }
+   },
+   "grpcSettings": {
+    "serviceName": "__SVC__",
+    "authority": "",
+    "multiMode": false
+   }
+  },
+  "sniffing": {
+   "enabled": false,
+   "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+   ],
+   "metadataOnly": false,
+   "routeOnly": false
+  }
+ },
+ {
+  "user_id": 1,
+  "enable": 1,
+  "total": 0,
+  "remark": "",
+  "listen": "",
+  "port": 2087,
+  "protocol": "vmess",
+  "tag": "inbound-2087",
+  "settings": {
+   "clients": [
+    {
+     "id": "__UUID__",
+     "security": "auto",
+     "password": "__PASSWORD__",
+     "flow": "",
+     "email": "__EMAIL__",
+     "limitIp": 0,
+     "totalGB": 0,
+     "expiryTime": 0,
+     "enable": true,
+     "tgId": 0,
+     "subId": "__SUBID__",
+     "comment": "",
+     "reset": 0,
+     "created_at": 1792358938000,
+     "updated_at": 1792358938000
+    }
+   ]
+  },
+  "stream_settings": {
+   "network": "ws",
+   "security": "tls",
+   "externalProxy": [
+    {
+     "forceTls": "same",
+     "dest": "__DOMAIN__",
+     "port": 2087,
+     "remark": ""
+    }
+   ],
+   "tlsSettings": {
+    "serverName": "__DOMAIN__",
+    "minVersion": "1.2",
+    "maxVersion": "1.3",
+    "cipherSuites": "",
+    "rejectUnknownSni": false,
+    "disableSystemRoot": false,
+    "enableSessionResumption": false,
+    "certificates": [
+     {
+      "certificateFile": "/etc/letsencrypt/live/__DOMAIN__/fullchain.pem",
+      "keyFile": "/etc/letsencrypt/live/__DOMAIN__/privkey.pem",
+      "ocspStapling": 3600,
+      "oneTimeLoading": false,
+      "usage": "encipherment",
+      "buildChain": false
+     }
+    ],
+    "alpn": [
+     "http/1.1"
+    ],
+    "settings": {
+     "allowInsecure": false,
+     "fingerprint": ""
+    }
+   },
+   "wsSettings": {
+    "acceptProxyProtocol": false,
+    "path": "__PATH__",
+    "host": "",
+    "headers": {}
+   }
+  },
+  "sniffing": {
+   "enabled": false,
+   "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+   ],
+   "metadataOnly": false,
+   "routeOnly": false
+  }
+ },
+ {
+  "user_id": 1,
+  "enable": 1,
+  "total": 0,
+  "remark": "",
+  "listen": "",
+  "port": 2443,
+  "protocol": "trojan",
+  "tag": "inbound-2443",
+  "settings": {
+   "clients": [
+    {
+     "id": "__UUID__",
+     "security": "",
+     "password": "__PASSWORD__",
+     "flow": "",
+     "email": "__EMAIL__",
+     "limitIp": 0,
+     "totalGB": 0,
+     "expiryTime": 0,
+     "enable": true,
+     "tgId": 0,
+     "subId": "__SUBID__",
+     "comment": "",
+     "reset": 0,
+     "created_at": 1792358936000,
+     "updated_at": 1792358936000
+    }
+   ],
+   "fallbacks": []
+  },
+  "stream_settings": {
+   "network": "tcp",
+   "security": "tls",
+   "externalProxy": [
+    {
+     "forceTls": "same",
+     "dest": "__DOMAIN__",
+     "port": 2443,
+     "remark": ""
+    }
+   ],
+   "tlsSettings": {
+    "serverName": "__DOMAIN__",
+    "minVersion": "1.2",
+    "maxVersion": "1.3",
+    "cipherSuites": "",
+    "rejectUnknownSni": false,
+    "disableSystemRoot": false,
+    "enableSessionResumption": false,
+    "certificates": [
+     {
+      "certificateFile": "/etc/letsencrypt/live/__DOMAIN__/fullchain.pem",
+      "keyFile": "/etc/letsencrypt/live/__DOMAIN__/privkey.pem",
+      "ocspStapling": 3600,
+      "oneTimeLoading": false,
+      "usage": "encipherment",
+      "buildChain": false
+     }
+    ],
+    "alpn": [
+     "h2",
+     "http/1.1"
+    ],
+    "settings": {
+     "allowInsecure": false,
+     "fingerprint": ""
+    }
+   },
+   "tcpSettings": {
+    "acceptProxyProtocol": false,
+    "header": {
+     "type": "none"
+    }
+   }
+  },
+  "sniffing": {
+   "enabled": false,
+   "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+   ],
+   "metadataOnly": false,
+   "routeOnly": false
+  }
+ },
+ {
+  "user_id": 1,
+  "enable": 1,
+  "total": 0,
+  "remark": "",
+  "listen": "",
+  "port": 8388,
+  "protocol": "shadowsocks",
+  "tag": "inbound-8388",
+  "settings": {
+   "clients": [
+    {
+     "id": "__UUID__",
+     "security": "",
+     "password": "__PASSWORD__",
+     "flow": "",
+     "email": "__EMAIL__",
+     "limitIp": 0,
+     "totalGB": 0,
+     "expiryTime": 0,
+     "enable": true,
+     "tgId": 0,
+     "subId": "__SUBID__",
+     "comment": "",
+     "reset": 0,
+     "created_at": 1792358939000,
+     "updated_at": 1792358939000
+    }
+   ],
+   "ivCheck": false,
+   "method": "2022-blake3-aes-128-gcm",
+   "network": "tcp,udp",
+   "password": "__SS_SRV_PW__"
+  },
+  "stream_settings": {
+   "network": "tcp",
+   "security": "none",
+   "externalProxy": [
+    {
+     "forceTls": "none",
+     "dest": "__DOMAIN__",
+     "port": 8388,
+     "remark": ""
+    }
+   ]
+  },
+  "sniffing": {
+   "enabled": false,
+   "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+   ],
+   "metadataOnly": false,
+   "routeOnly": false
+  }
+ },
+ {
+  "user_id": 1,
+  "enable": 1,
+  "total": 0,
+  "remark": "",
+  "listen": "",
+  "port": 8447,
+  "protocol": "vless",
+  "tag": "inbound-8447",
+  "settings": {
+   "clients": [
+    {
+     "id": "__UUID__",
+     "security": "",
+     "password": "__PASSWORD__",
+     "flow": "",
+     "email": "__EMAIL__",
+     "limitIp": 0,
+     "totalGB": 0,
+     "expiryTime": 0,
+     "enable": true,
+     "tgId": 0,
+     "subId": "__SUBID__",
+     "comment": "",
+     "reset": 0,
+     "created_at": 1792358936000,
+     "updated_at": 1792358936000
+    }
+   ],
+   "decryption": "none",
+   "fallbacks": []
+  },
+  "stream_settings": {
+   "network": "xhttp",
+   "security": "reality",
+   "externalProxy": [
+    {
+     "forceTls": "same",
+     "dest": "__DOMAIN__",
+     "port": 8447,
+     "remark": ""
+    }
+   ],
+   "realitySettings": {
+    "show": false,
+    "xver": 0,
+    "target": "127.0.0.1:8443",
+    "serverNames": [
+     "__DOMAIN__"
+    ],
+    "privateKey": "__REALITY_PRIV__",
+    "shortIds": [
+     "__SHORTIDS__"
+    ],
+    "settings": {
+     "publicKey": "__REALITY_PUB__",
+     "fingerprint": "chrome",
+     "serverName": "__DOMAIN__",
+     "spiderX": "/"
+    }
+   },
+   "xhttpSettings": {
+    "path": "__PATH__",
+    "host": "",
+    "mode": "auto"
+   }
+  },
+  "sniffing": {
+   "enabled": false,
+   "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+   ],
+   "metadataOnly": false,
+   "routeOnly": false
+  }
+ }
+]

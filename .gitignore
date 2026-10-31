@@ -1,0 +1,6 @@
+# секреты и локальное — НЕ коммитить
+config.env
+credentials.txt
+*.log
+lib/__pycache__/
+*.pyc
