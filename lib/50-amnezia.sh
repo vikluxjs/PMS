@@ -21,6 +21,14 @@ phase_amnezia() {
   [ -n "$HASH" ] || die "Не удалось сгенерировать bcrypt-хэш пароля Amnezia."
 
   mkdir -p /opt/amnezia-wg-easy
+
+  # Ядровые модули, нужные контейнеру: TUN — для userspace wireguard-go (создать
+  # интерфейс), iptables-NAT — для MASQUERADE внутри контейнера (его iptables не
+  # может insmod'ить сам, т.к. /lib/modules внутрь не проброшен). Без них контейнер
+  # крэш-лупит ("Cannot find device wg0" / "can't initialize iptables table nat").
+  for m in tun ip_tables iptable_filter nf_nat iptable_nat; do modprobe "$m" 2>/dev/null || true; done
+  printf 'tun\nip_tables\niptable_filter\nnf_nat\niptable_nat\n' > /etc/modules-load.d/amnezia.conf
+
   docker rm -f amnezia-wg-easy >/dev/null 2>&1 || true
   docker pull ghcr.io/w0rng/amnezia-wg-easy >/dev/null 2>&1 || warn "docker pull не удался — попробую локальный образ."
   docker run -d --name amnezia-wg-easy --restart unless-stopped \
@@ -32,6 +40,7 @@ phase_amnezia() {
     -v /opt/amnezia-wg-easy:/etc/wireguard \
     -p 127.0.0.1:${AWG_UI_PORT}:${AWG_UI_PORT}/tcp \
     -p ${WG_PORT}:${WG_PORT}/udp \
+    --device /dev/net/tun:/dev/net/tun \
     --cap-add NET_ADMIN --cap-add SYS_MODULE \
     --sysctl net.ipv4.conf.all.src_valid_mark=1 \
     --sysctl net.ipv4.ip_forward=1 \

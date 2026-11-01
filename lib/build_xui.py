@@ -16,13 +16,21 @@ CERT_FULL  = os.environ["CERT_FULL"]
 CERT_KEY   = os.environ["CERT_KEY"]
 NOW = int(time.time() * 1000)
 
-def reality_privkey():
+def reality_keypair():
+    # xray x25519 печатает приватный ключ в строке 'PrivateKey:' и ПУБЛИЧНЫЙ —
+    # в строке 'Password:' (в свежих сборках xray публичный ключ переименован).
+    # Возвращаем пару (priv, pub): pub идёт клиенту в pbk=.
     out = subprocess.check_output([XRAY, "x25519"], text=True)
+    priv = pub = None
     for line in out.splitlines():
         low = line.lower()
         if "private" in low:
-            return line.split(":", 1)[1].strip()
-    raise RuntimeError("не распарсил xray x25519:\n" + out)
+            priv = line.split(":", 1)[1].strip()
+        elif "password" in low or "public" in low:
+            pub = line.split(":", 1)[1].strip()
+    if not priv or not pub:
+        raise RuntimeError("не распарсил xray x25519 (нужны priv+pub):\n" + out)
+    return priv, pub
 
 def short_ids():
     ids = [""]
@@ -92,8 +100,11 @@ def main():
 
         # свежие секреты транспорта
         if ss.get("security") == "reality":
-            ss["realitySettings"]["privateKey"] = reality_privkey()
+            priv, pub = reality_keypair()
+            ss["realitySettings"]["privateKey"] = priv
             ss["realitySettings"]["shortIds"] = short_ids()
+            # публичный ключ в клиентскую часть → попадает в подписку как pbk=
+            ss["realitySettings"].setdefault("settings", {})["publicKey"] = pub
         if "wsSettings" in ss and "path" in ss["wsSettings"]:
             ss["wsSettings"]["path"] = rand_path()
         if "xhttpSettings" in ss and "path" in ss["xhttpSettings"]:
@@ -108,7 +119,10 @@ def main():
         clients = []
         for nm in names:
             sid = subids.setdefault(nm, sub_id())
-            clients.append(make_client(tmpl_client, proto, nm, sid))
+            # email обязан быть глобально уникальным в x-ui → дискриминируем портом
+            # инбаунда; subId общий на юзера, поэтому /sub/<subId> по-прежнему
+            # собирает все протоколы в одну подписку.
+            clients.append(make_client(tmpl_client, proto, f"{nm}-{t['port']}", sid))
         st["clients"] = clients
 
         cur.execute(
